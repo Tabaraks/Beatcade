@@ -42,12 +42,44 @@ const Home = () => {
     white: false,
   });
 
-  const imageToAudio = {
+  const iconic = {
     "Gold Play": "IO.wav",
     "Purple Play": "Kerberos.wav",
     "Blue Play": "Luna.wav",
     "Green Play": "Lapetus.wav",
     "White Play": "Deimos.wav",
+  };
+
+  const legendary = {
+    "Gold Play": "Saw-1.wav",
+    "Purple Play": "Saw-2.wav",
+    "Blue Play": "Saw-3.wav",
+    "Green Play": "Saw-4.wav",
+    "White Play": "Saw-5.wav",
+  };
+
+  const epic = {
+    "Gold Play": "Neso.wav",
+    "Purple Play": "sem.wav",
+    "Blue Play": "rhea.wav",
+    "Green Play": "ariel.wav",
+    "White Play": "tital.wav",
+  };
+
+  const rare = {
+    "Gold Play": "FullMix1.wav",
+    "Purple Play": "Fullmix2.wav",
+    "Blue Play": "Keysstem.wav",
+    "Green Play": "Percstem.wav",
+    "White Play": "FullMix.wav",
+  };
+
+  const common = {
+    "Gold Play": "HiHatStem3.wav",
+    "Purple Play": "KeysStem3.wav",
+    "Blue Play": "KickStem3.wav",
+    "Green Play": "PercStem3.wav",
+    "White Play": "BassStem3.wav",
   };
 
   useEffect(() => {
@@ -114,7 +146,18 @@ const Home = () => {
   // }, [modelState])
 
   const playAudio = (imageName) => {
-    const audioPath = imageToAudio[imageName];
+    const audioPath =
+      snap.model === "Packs" && modelState.colorName === "iconic"
+        ? iconic[imageName]
+        : modelState.colorName === "legendary"
+        ? legendary[imageName]
+        : modelState.colorName === "epic"
+        ? epic[imageName]
+        : modelState.colorName === "rare"
+        ? rare[imageName]
+        : modelState.colorName === "common"
+        ? common[imageName]
+        : rare[imageName];
 
     if (audioPath) {
       if (currentPlayer) {
