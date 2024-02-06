@@ -329,9 +329,21 @@ const Home = () => {
               <p className="text-white font-[G7 Silkworm TTF] leading-3 text-[1vw] font-normal  tracking-[-0.36px]">
                 BHaruMusic Presents
               </p>
-              <p className="text-[#ADDFFF] font-[Whangarei] leading-[4vw] text-[4vw] font-normal  tracking-[-1.52px]">
-                VOYAGER
-              </p>
+              <div className="flex  items-center gap-[1rem]">
+                <p className="text-[#ADDFFF] font-[Whangarei] leading-[4vw] text-[4vw] font-normal  tracking-[-1.52px]">
+                  VOYAGER
+                </p>
+                <div className=" flex flex-col  items-center">
+                  <p className="text-[#ADDFFF] text-[17px] font-[Whangarei] font-normal tracking-[-0.72px] leading-[0px] uppercase">
+                    Next Drop
+                  </p>
+                  \
+                  <p className="text-[#fff] text-[12px] font-normal tracking-[-0.46px] leading-[0px] ">
+                    {dropTime.day}d {dropTime.hour}h {dropTime.minute}m{" "}
+                    {dropTime.second}s
+                  </p>
+                </div>
+              </div>
             </motion.div>
 
             <motion.div
@@ -363,7 +375,7 @@ const Home = () => {
             className="absolute right-0 top-0 flex flex-row gap-[23px] items-center"
             style={{ visibility: snap.fullscreen ? "hidden" : "visible" }}
           >
-            {MyData.models.map((name, index) => (
+            {MyData.models.map((name) => (
               <p
                 className="text-white font-[Inter] text-[1.2vw] font-bold tracking-[-0.46px] cursor-pointer pointer-events-auto"
                 style={
@@ -371,7 +383,7 @@ const Home = () => {
                     ? { textShadow: "0px 0px 10px #B0FFFF" }
                     : {}
                 }
-                key={index}
+                key={name}
                 onClick={() => {
                   state.model = name;
                 }}
@@ -522,16 +534,6 @@ const Home = () => {
         />
       </div>
 
-      <div className="absolute flex flex-col left-[19%] top-[83%] translate-x-[-50%] bottom-[30px] items-center">
-        <p className="text-[#ADDFFF] text-[17px] font-[Whangarei] font-normal tracking-[-0.72px] leading-[0px] uppercase">
-          Next Drop
-        </p>
-        \
-        <p className="text-[#fff] text-[12px] font-normal tracking-[-0.46px] leading-[0px] ==">
-          {dropTime.day}d {dropTime.hour}h {dropTime.minute}m {dropTime.second}s
-        </p>
-      </div>
-
       {(snap.model === "Packs" || snap.model === "Machines") && (
         <div className="absolute flex flex-col left-[0%] top-[49%] translate-y-[-50%] items-center z-40">
           <img
@@ -661,13 +663,13 @@ const Home = () => {
       {snap.model === "Packs" && snap.enableMenu === false && modelState && (
         <div className="absolute flex flex-col left-[52vw] top-[25vh] xl:top-[30vh] w-[34vw] xl:w-[27vw] gap-[0px]">
           <p
-            className={`font-[Whangarei] text-[26px] font-normal tracking-[-0.72px] leading-[22px]`}
+            className={"font-[Whangarei] text-[26px] font-normal tracking-[-0.72px] leading-[22px]"}
             style={{ color: modelState.color }}
           >
             {modelState.title}
           </p>
           <p
-            className={`font-[Whangarei]  lg:text-[70px] xl:text-[70px] font-normal tracking-[-1.92px] leading-[72px] uppercase`}
+            className={"font-[Whangarei]  lg:text-[70px] xl:text-[70px] font-normal tracking-[-1.92px] leading-[72px] uppercase"}
             style={{ color: modelState.color }}
           >
             {modelState.name}{" "}
