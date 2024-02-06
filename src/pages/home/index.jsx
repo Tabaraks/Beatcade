@@ -280,8 +280,10 @@ const Home = () => {
     if (currentPlayer) {
       if (isPlaying) {
         currentPlayer.stop();
+        setStartTime(null);
       } else {
         currentPlayer.start();
+        setStartTime(Tone.now() - startTime);
       }
       setIsPlaying(!isPlaying);
     }
