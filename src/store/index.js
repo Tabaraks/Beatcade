@@ -20,7 +20,7 @@ const state = proxy({
     disappear: false,
     fullscreen: false,
     model: "",
-    modelId: "1-1",
+    modelId: "1",
 
     // subscribing: false,
     // isLogoTexture: true,

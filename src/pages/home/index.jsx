@@ -305,6 +305,29 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [currentPlayer, startTime]);
 
+  useEffect(() => {
+    const handleClickOutsideMenu = (event) => {
+      if (snap.enableMenu) {
+        const menu = document.getElementById("menu");
+        const menuButton = document.getElementById("menu-button");
+        if (
+          menu &&
+          !menu.contains(event.target) &&
+          !menuButton.contains(event.target)
+        ) {
+          state.enableMenu = !snap.enableMenu;
+        }
+      }
+    };
+
+    if (snap.enableMenu) {
+      document.addEventListener("click", handleClickOutsideMenu);
+    }
+    return () => {
+      document.removeEventListener("click", handleClickOutsideMenu);
+    };
+  }, [snap.enableMenu]);
+
   return (
     <AnimatePresence>
       <div className="absolute w-full h-full pl-[2.2vw] pr-[5.2vw] pt-[4.6vh] pb-[4.8vh] z-20 pointer-events-none">
@@ -432,7 +455,10 @@ const Home = () => {
           visibility: snap.fullscreen ? "hidden" : "visible",
         }}
       >
-        <div className="flex flex-col h-[30vh] justify-between">
+        <div
+          id="menu-button"
+          className="flex flex-col h-[30vh] justify-between"
+        >
           <img
             className="w-[30px] object-contain cursor-pointer"
             src="/images/menu-icons/menu-01.png"
@@ -631,13 +657,18 @@ const Home = () => {
           )}
         </div>
       )}
-      <div className="flex-col absolute right-[45%] top-[80%] z-50">
-        <p className="text-white text-[16px] mb-0 text-center">
+      <div className="flex-col absolute right-[45%] top-[77%] z-50">
+        <p className="text-white font-bold text-[19px] mb-0 text-center">
           {audioName.includes(".")
             ? audioName.substring(0, audioName.indexOf("."))
             : audioName}
         </p>
-        <div className="w-full h-2 bg-gray-200 rounded overflow-hidden mt-2">
+        <p className="text-white text-[13px] mb-0 text-center">
+          { ` Artist Name: ${audioName.includes(".")
+            ? audioName.substring(0, audioName.indexOf("."))
+            : audioName}`}
+        </p>
+        <div className="w-full h-1 bg-gray-200 rounded overflow-hidden mt-2">
           <div
             className="h-full bg-blue-500"
             style={{ width: `${progress}%` }}
@@ -667,13 +698,17 @@ const Home = () => {
       {snap.model === "Packs" && snap.enableMenu === false && modelState && (
         <div className="absolute flex flex-col left-[52vw] top-[25vh] xl:top-[30vh] w-[34vw] xl:w-[27vw] gap-[0px]">
           <p
-            className={"font-[Whangarei] text-[26px] font-normal tracking-[-0.72px] leading-[22px]"}
+            className={
+              "font-[Whangarei] text-[26px] font-normal tracking-[-0.72px] leading-[22px]"
+            }
             style={{ color: modelState.color }}
           >
             {modelState.title}
           </p>
           <p
-            className={"font-[Whangarei]  lg:text-[70px] xl:text-[70px] font-normal tracking-[-1.92px] leading-[72px] uppercase"}
+            className={
+              "font-[Whangarei]  lg:text-[70px] xl:text-[70px] font-normal tracking-[-1.92px] leading-[72px] uppercase"
+            }
             style={{ color: modelState.color }}
           >
             {modelState.name}{" "}
