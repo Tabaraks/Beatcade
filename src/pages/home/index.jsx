@@ -32,6 +32,8 @@ const Home = () => {
     "White Play",
   ];
 
+  const [audioName, setAudioName] = useState("");
+
   const [currentIndex, setCurrentIndex] = useState(null);
 
   const [isPlaying, setIsPlaying] = useState({
@@ -158,7 +160,7 @@ const Home = () => {
         : modelState.colorName === "common"
         ? common[imageName]
         : rare[imageName];
-
+    setAudioName(audioPath);
     if (audioPath) {
       if (currentPlayer) {
         currentPlayer.stop();
@@ -268,6 +270,38 @@ const Home = () => {
       }));
     }
   };
+
+  const togglePlay = () => {
+    if (currentPlayer) {
+      if (isPlaying) {
+        currentPlayer.stop();
+      } else {
+        currentPlayer.start();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      if (!currentPlayer) return;
+
+      const currentPosition =
+        currentPlayer.state === "started" ? Tone.now() : 0;
+      const duration = currentPlayer.buffer.duration;
+      const percentage = (currentPosition / duration) * 100;
+
+      setProgress(percentage);
+    };
+
+    // Setup interval for updating progress
+    const interval = setInterval(updateProgress, 100);
+
+    // Cleanup function to clear interval
+    return () => clearInterval(interval);
+  }, [currentPlayer]);
 
   return (
     <AnimatePresence>
@@ -490,12 +524,12 @@ const Home = () => {
         />
       </div>
 
-      <div className="absolute flex flex-col left-[50%] translate-x-[-50%] bottom-[30px] items-center">
-        <p className="text-[#ADDFFF] text-[36px] font-[Whangarei] font-normal tracking-[-0.72px] leading-[22px] uppercase">
+      <div className="absolute flex flex-col left-[19%] top-[83%] translate-x-[-50%] bottom-[30px] items-center">
+        <p className="text-[#ADDFFF] text-[17px] font-[Whangarei] font-normal tracking-[-0.72px] leading-[0px] uppercase">
           Next Drop
         </p>
         \
-        <p className="text-[#fff] text-[23px] font-normal tracking-[-0.46px] leading-[22px] ==">
+        <p className="text-[#fff] text-[12px] font-normal tracking-[-0.46px] leading-[0px] ==">
           {dropTime.day}d {dropTime.hour}h {dropTime.minute}m {dropTime.second}s
         </p>
       </div>
@@ -582,18 +616,7 @@ const Home = () => {
               }));
             }}
           />
-          <div className="flex mt-5 gap-x-3">
-            <img
-              src="/images/icon/prev.svg"
-              className="w-[5vh] cursor-pointer"
-              onClick={handlePrevious}
-            />
-            <img
-              src="/images/icon/next.svg"
-              className="w-[5vh] cursor-pointer"
-              onClick={handleNext}
-            />
-          </div>
+
           {modelState && (
             <Card
               name={modelState.name}
@@ -604,6 +627,34 @@ const Home = () => {
           )}
         </div>
       )}
+      <div className="flex-col absolute right-[45%] top-[80%] z-50">
+        <p className="text-white text-[16px] mb-0 text-center">{audioName}</p>
+        <div className="flex mt-2 gap-x-3">
+          <img
+            src="/images/icon/prev.svg"
+            className="w-[5vh] cursor-pointer"
+            onClick={handlePrevious}
+          />
+          <img
+            src={`${
+              !isPlaying ? "/images/icon/play.svg" : "/images/icon/pause.svg"
+            }`}
+            className="w-[6vh] cursor-pointer"
+            onClick={togglePlay}
+          />
+          <img
+            src="/images/icon/next.svg"
+            className="w-[5vh] cursor-pointer"
+            onClick={handleNext}
+          />
+        </div>
+        <div className="w-full h-2 bg-gray-200 rounded overflow-hidden mt-2">
+          <div
+            className="h-full bg-blue-500"
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
+      </div>
 
       {snap.model === "Packs" && snap.enableMenu === false && modelState && (
         <div className="absolute flex flex-col left-[52vw] top-[25vh] xl:top-[30vh] w-[34vw] xl:w-[27vw] gap-[0px]">
