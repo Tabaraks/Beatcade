@@ -36,6 +36,8 @@ const Home = () => {
 
   const [currentIndex, setCurrentIndex] = useState(null);
 
+  const [startTime, setStartTime] = useState(null);
+
   const [isPlaying, setIsPlaying] = useState({
     gold: false,
     blue: false,
@@ -164,6 +166,8 @@ const Home = () => {
     if (audioPath) {
       if (currentPlayer) {
         currentPlayer.stop();
+        setProgress(0);
+        setStartTime(null);
       }
 
       let player;
@@ -171,6 +175,7 @@ const Home = () => {
       player = new Tone.Player(`/sampler/MP3s/${audioPath}`).toDestination();
       player.autostart = true;
       setCurrentPlayer(player);
+      setStartTime(Tone.now());
     } else {
       console.error("No audio mapping found for image:", imageName);
     }
@@ -286,10 +291,9 @@ const Home = () => {
 
   useEffect(() => {
     const updateProgress = () => {
-      if (!currentPlayer) return;
+      if (!startTime || !currentPlayer) return;
 
-      const currentPosition =
-        currentPlayer.state === "started" ? Tone.now() : 0;
+      const currentPosition = Tone.now() - startTime;
       const duration = currentPlayer.buffer.duration;
       const percentage = (currentPosition / duration) * 100;
 
@@ -299,7 +303,7 @@ const Home = () => {
     const interval = setInterval(updateProgress, 100);
 
     return () => clearInterval(interval);
-  }, [currentPlayer]);
+  }, [currentPlayer, startTime]);
 
   return (
     <AnimatePresence>
@@ -633,6 +637,12 @@ const Home = () => {
             ? audioName.substring(0, audioName.indexOf("."))
             : audioName}
         </p>
+        <div className="w-full h-2 bg-gray-200 rounded overflow-hidden mt-2">
+          <div
+            className="h-full bg-blue-500"
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
         <div className="flex mt-2 gap-x-3">
           <img
             src="/images/icon/prev.svg"
@@ -651,12 +661,6 @@ const Home = () => {
             className="w-[5vh] cursor-pointer"
             onClick={handleNext}
           />
-        </div>
-        <div className="w-full h-2 bg-gray-200 rounded overflow-hidden mt-2">
-          <div
-            className="h-full bg-blue-500"
-            style={{ width: `${progress}%` }}
-          ></div>
         </div>
       </div>
 
