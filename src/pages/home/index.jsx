@@ -296,10 +296,8 @@ const Home = () => {
       setProgress(percentage);
     };
 
-    // Setup interval for updating progress
     const interval = setInterval(updateProgress, 100);
 
-    // Cleanup function to clear interval
     return () => clearInterval(interval);
   }, [currentPlayer]);
 
@@ -628,7 +626,11 @@ const Home = () => {
         </div>
       )}
       <div className="flex-col absolute right-[45%] top-[80%] z-50">
-        <p className="text-white text-[16px] mb-0 text-center">{audioName}</p>
+        <p className="text-white text-[16px] mb-0 text-center">
+          {audioName.includes(".")
+            ? audioName.substring(0, audioName.indexOf("."))
+            : audioName}
+        </p>
         <div className="flex mt-2 gap-x-3">
           <img
             src="/images/icon/prev.svg"
