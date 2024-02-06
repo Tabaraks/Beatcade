@@ -69,7 +69,7 @@ const getIcon = (name, hovered) => {
   if (name === "play") {
     return <svg className='w-[1.4vw]' width="24" height="24" viewBox="0 0 24 24" fill='none' xmlns="http://www.w3.org/2000/svg">
       <g id="player-play">
-        <path id="button-icon" d="M7 4V20L20 12L7 4Z" stroke={hovered ? "#043467" : "white"} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style={{ transition: "all 0.4s ease-in-out" }} />
+        <path id="button-icon" d="M7 4V20L20 12L7 4Z" stroke={hovered ? "#043467" : "white"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "all 0.4s ease-in-out" }} />
       </g>
     </svg>
 

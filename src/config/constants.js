@@ -17,10 +17,12 @@ export const EditorTabs = [
 
 export const matTabs = [
     {
+        id:"1",
         name: "wood",
         icon: logoShirt,
     },
     {
+        id:"2",
         name: "metal",
         icon: stylishShirt,
     },

@@ -141,7 +141,7 @@ const Customizer = () => {
         <motion.div className="filtertabs-container" {...slideAnimation("up")}>
           {matTabs.map((tab) => (
             <Tab
-              key={tab.name}
+              key={tab.id}
               tab={tab}
               isFilterTab
               isActiveTab={snap.materialType === tab.name}
