@@ -36,7 +36,15 @@ const Home = () => {
 
   const [currentIndex, setCurrentIndex] = useState(null);
 
+  const [progress, setProgress] = useState(0);
+
   const [startTime, setStartTime] = useState(null);
+
+  const [volume, setVolume] = useState(0.5);
+
+  const [sound, setSound] = useState(true);
+
+  const [voice, setVoice] = useState();
 
   const [isPlaying, setIsPlaying] = useState({
     gold: false,
@@ -282,14 +290,21 @@ const Home = () => {
         currentPlayer.stop();
         setStartTime(null);
       } else {
+        if (!startTime) {
+          const currentPositionInSeconds =
+            (progress / 100) * currentPlayer.buffer.duration;
+          setStartTime(Tone.now() - currentPositionInSeconds);
+        }
         currentPlayer.start();
-        setStartTime(Tone.now() - startTime);
       }
       setIsPlaying(!isPlaying);
     }
   };
 
-  const [progress, setProgress] = useState(0);
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+  };
 
   useEffect(() => {
     const updateProgress = () => {
@@ -329,6 +344,10 @@ const Home = () => {
       document.removeEventListener("click", handleClickOutsideMenu);
     };
   }, [snap.enableMenu]);
+
+  useEffect(() => {
+    Tone.Destination.volume.value = Tone.gainToDb(volume);
+  }, [volume]);
 
   return (
     <AnimatePresence>
@@ -666,9 +685,11 @@ const Home = () => {
             : audioName}
         </p>
         <p className="text-white text-[13px] mb-0 text-center">
-          { ` Artist Name: ${audioName.includes(".")
-            ? audioName.substring(0, audioName.indexOf("."))
-            : audioName}`}
+          {` Artist Name: ${
+            audioName.includes(".")
+              ? audioName.substring(0, audioName.indexOf("."))
+              : audioName
+          }`}
         </p>
         <div className="w-full h-1 bg-gray-200 rounded overflow-hidden mt-2">
           <div
@@ -676,24 +697,48 @@ const Home = () => {
             style={{ width: `${progress}%` }}
           ></div>
         </div>
-        <div className="flex mt-2 gap-x-3">
-          <img
-            src="/images/icon/prev.svg"
-            className="w-[5vh] cursor-pointer"
-            onClick={handlePrevious}
-          />
-          <img
-            src={`${
-              !isPlaying ? "/images/icon/play.svg" : "/images/icon/pause.svg"
-            }`}
-            className="w-[6vh] cursor-pointer"
-            onClick={togglePlay}
-          />
-          <img
-            src="/images/icon/next.svg"
-            className="w-[5vh] cursor-pointer"
-            onClick={handleNext}
-          />
+        <div className="flex mt-2 gap-x-3 justify-center items-center">
+          <div className="flex">
+            <img
+              src="/images/icon/prev.svg"
+              className="w-[5vh] cursor-pointer"
+              onClick={handlePrevious}
+            />
+            <img
+              src={`${
+                !isPlaying ? "/images/icon/play.svg" : "/images/icon/pause.svg"
+              }`}
+              className="w-[6vh] cursor-pointer"
+              onClick={togglePlay}
+            />
+            <img
+              src="/images/icon/next.svg"
+              className="w-[5vh] cursor-pointer"
+              onClick={handleNext}
+            />
+          </div>
+          <div className="flex items-center">
+            <img
+              onClick={() => {
+                setVolume(!sound ? 1 : 0);
+                setSound(!sound);
+              }}
+              src={`${
+                sound ? "/images/icon/speaker.svg" : "/images/icon/mute.svg"
+              }`}
+              alt="Speaker Icon"
+              className="w-6 mr-2"
+            />
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolumeChange}
+              className="w-24 h-1 bg-gray-300 rounded-lg appearance-none focus:outline-none"
+            />
+          </div>
         </div>
       </div>
 
