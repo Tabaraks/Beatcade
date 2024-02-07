@@ -361,7 +361,7 @@ const Home = () => {
                 onClick={goHomePage}
               >BEATCADE™</p> */}
               <img
-                className="w-[25vw] object-contain cursor-pointer pointer-events-auto"
+                className="w-[25vw] object-contain cursor-pointer pointer-events-auto transform transition-transform ease-in-out-custom duration-900 hover:scale-110 "
                 style={snap.fullscreen ? { opacity: 0.3 } : { opacity: 1 }}
                 src="/images/logo.svg"
                 alt="logo"

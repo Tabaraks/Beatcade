@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import MyData from "../../config/data.json";
 
 const VectorIcon = ({ color }) => {
@@ -41,19 +40,13 @@ export const Card = ({
   onClickProps,
   customClass,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
   const color = MyData.colors[colorName];
 
   return (
     <div
-      className={`relative w-[163px] flex flex-col items-center h-fit gap-[5vh] cursor-pointer ${customClass} `}
+      className={`relative w-[163px] flex flex-col items-center h-fit gap-[5vh] cursor-pointer ${customClass} transform transition-transform hover:scale-110 `}
       onClick={onClickProps}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        transition: "transform 0.3s ease",
-        transform: isHovered ? "scale(1.1)" : "scale(1)",
-      }}
+      
     >
       <VectorIcon color={color} />
       <div
