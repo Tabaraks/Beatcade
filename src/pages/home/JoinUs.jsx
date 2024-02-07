@@ -749,7 +749,7 @@ export const JoinUs = () => {
       {snap.page === PAGES.joinus && !snap.model && (
         <div className="flex w-full absolute top-[18%] left-[15%] z-50 gap-x-[70px]">
           <div className="relative">
-            <img src="/images/icon/comet-bg.png" className="w-[280px]" />
+            <img src="/images/icon/comet-bg.png" className="w-[40vh]" />
             <img
               className="absolute top-[20%] w-[360px] left-[-1.5%]"
               src="/images/products/machines/comet.png"
@@ -774,7 +774,7 @@ export const JoinUs = () => {
             </div>
           </div>
           <div className="relative">
-            <img src="/images/icon/filament-bg.png" className="w-[280px]" />
+            <img src="/images/icon/filament-bg.png" className="w-[40vh]" />
             <img
               className="absolute top-[10%] w-[360px] left-[0%]"
               src="/images/products/machines/filament.png"
@@ -806,7 +806,7 @@ export const JoinUs = () => {
             </div>
           </div>
           <div className="relative">
-            <img src="/images/icon/fusion-bg.png" className="w-[280px]" />
+            <img src="/images/icon/fusion-bg.png" className="w-[40vh]" />
             <img
               className="absolute top-[35%] w-[200px] left-[15%]"
               src="/images/products/machines/dreamfire.png"
