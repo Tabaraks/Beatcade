@@ -44,8 +44,9 @@ export const Card = ({
 
   return (
     <div
-      className={`relative w-[163px] flex flex-col items-center h-fit gap-[5vh] cursor-pointer ${customClass}`}
+      className={`relative w-[163px] flex flex-col items-center h-fit gap-[5vh] cursor-pointer ${customClass} transform transition-transform hover:scale-110 `}
       onClick={onClickProps}
+      
     >
       <VectorIcon color={color} />
       <div

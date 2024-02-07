@@ -680,7 +680,7 @@ export const JoinUs = () => {
           )}
         </div>
       )}
-      {snap.page !== PAGES.joinus && (
+      {snap.page !== PAGES.joinus || snap.model && (
         <div className="flex-col absolute right-[45%] top-[77%] z-50">
           <p className="text-white font-bold text-[19px] mb-0 text-center">
             {audioName.includes(".")
