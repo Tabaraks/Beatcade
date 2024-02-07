@@ -142,13 +142,12 @@ const Home = () => {
       type: snap.model,
       title: model.title,
       name: model.name,
-      subName:model.subName,
+      subName: model.subName,
       description: model.description,
       subDescription: model.subDescription,
       color: color,
       imgUrl: model.imgUrl,
       colorName: model.colorName,
-
     });
   };
 
@@ -178,7 +177,7 @@ const Home = () => {
       if (currentPlayer) {
         currentPlayer.stop();
         setProgress(0);
-        setStartTime(null);
+        setStartTime(Tone.now());
       }
 
       let player;
@@ -186,7 +185,7 @@ const Home = () => {
       player = new Tone.Player(`/sampler/MP3s/${audioPath}`).toDestination();
       player.autostart = true;
       setCurrentPlayer(player);
-      setStartTime(Tone.now());
+      setManageProgress(Tone.now());
     } else {
       console.error("No audio mapping found for image:", imageName);
     }
@@ -758,24 +757,22 @@ const Home = () => {
             {modelState.title}
           </p>
           <div className="flex gap-[2.5rem] items-center">
-
-         
-          <p
-            className={
-              "font-[Whangarei]  lg:text-[70px] xl:text-[70px] font-normal tracking-[-1.92px] leading-[72px] uppercase"
-            }
-            style={{ color: modelState.color }}
-          >
-            {modelState.name}{" "}
-          </p>
-          <p
-            className={
-              "font-[Whangarei]  text-[25px] font-normal tracking-[-1.92px] leading-[26px] uppercase"
-            }
-            style={{ color: modelState.color }}
-          >
-            {modelState.subName}{" "}
-          </p>
+            <p
+              className={
+                "font-[Whangarei]  lg:text-[70px] xl:text-[70px] font-normal tracking-[-1.92px] leading-[72px] uppercase"
+              }
+              style={{ color: modelState.color }}
+            >
+              {modelState.name}{" "}
+            </p>
+            <p
+              className={
+                "font-[Whangarei]  text-[25px] font-normal tracking-[-1.92px] leading-[26px] uppercase"
+              }
+              style={{ color: modelState.color }}
+            >
+              {modelState.subName}{" "}
+            </p>
           </div>
           <p className="text-white font-[Inter] text-[12px] lg:text-[10px] xl:text-[15px] font-bold tracking-[-0.46px] leading-[18px]">
             {modelState.description}
