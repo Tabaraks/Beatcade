@@ -394,29 +394,30 @@ export const JoinUs = () => {
                 )}
               </div>
             </motion.div>
-            {snap.page !== PAGES.joinus && (
-              <motion.div
-                {...headContentAnimation}
-                className="flex flex-row gap-[1.5vw]"
-              >
-                <CustomButton
-                  type="outline"
-                  title="JOIN NOW"
-                  customStyles="outl font-bold"
-                  icon="trophy"
-                  iconPos="start"
-                ></CustomButton>
+            {snap.page !== PAGES.joinus ||
+              (snap.model && (
+                <motion.div
+                  {...headContentAnimation}
+                  className="flex flex-row gap-[1.5vw]"
+                >
+                  <CustomButton
+                    type="outline"
+                    title="JOIN NOW"
+                    customStyles="outl font-bold"
+                    icon="trophy"
+                    iconPos="start"
+                  ></CustomButton>
 
-                <CustomButton
-                  type="filled"
-                  title="START TOUR"
-                  // handleClick={() => state.page = PAGES.customize}
-                  customStyles="fill font-bold"
-                  icon="play"
-                  iconPos="end"
-                />
-              </motion.div>
-            )}
+                  <CustomButton
+                    type="filled"
+                    title="START TOUR"
+                    // handleClick={() => state.page = PAGES.customize}
+                    customStyles="fill font-bold"
+                    icon="play"
+                    iconPos="end"
+                  />
+                </motion.div>
+              ))}
           </motion.div>
 
           <motion.div
