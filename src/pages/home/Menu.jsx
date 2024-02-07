@@ -45,6 +45,7 @@ export const Menu = () => {
         background:
           "linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 80%, rgba(0,0,0,1) 100%)",
         display: snap.fullscreen ? "none" : "flex",
+      
       }}
      
       initial={{ x: "100vw" }} // Initial position outside the viewport
