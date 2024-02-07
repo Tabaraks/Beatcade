@@ -763,12 +763,12 @@ export const JoinUs = () => {
                 iconPos="start"
               />
             </div>
-            <div className="absolute top-[5%] left-[22%]">
+            <div className="absolute top-[5%] left-[13%]">
               <p className="text-[#9AF6F1] drop-shadow-[0_0_8.2px_#9AF6F1] font-['Atyp Display'] font-bold text-[36px]">
                 CREATOR
               </p>
             </div>
-            <div className="flex flex-col gap-y-2 absolute top-[60%] left-[30%] text-center">
+            <div className="flex flex-col gap-y-2 absolute top-[60%] left-[27%] text-center">
               <p className="text-white">2 Machines</p>
               <p className="text-white">Weekly Drops</p>
             </div>
@@ -779,7 +779,7 @@ export const JoinUs = () => {
               className="absolute top-[10%] w-[360px] left-[0%]"
               src="/images/products/machines/filament.png"
             />
-            <div className="absolute top-[83%] right-[20%]">
+            <div className="absolute top-[83%] right-[13%]">
               <CustomButton
                 type="outline"
                 title="JOIN NOW"
@@ -808,10 +808,10 @@ export const JoinUs = () => {
           <div className="relative">
             <img src="/images/icon/fusion-bg.png" className="w-[40vh]" />
             <img
-              className="absolute top-[35%] w-[200px] left-[15%]"
+              className="absolute top-[35%] w-[200px] left-[13%]"
               src="/images/products/machines/dreamfire.png"
             />
-            <div className="absolute top-[83%] left-[20%]">
+            <div className="absolute top-[83%] left-[18%]">
               <CustomButton
                 type="outline"
                 title="JOIN NOW"
