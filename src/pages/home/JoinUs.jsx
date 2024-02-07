@@ -746,10 +746,10 @@ export const JoinUs = () => {
           </div>
         </div>
       )}
-      {snap.page === PAGES.joinus && (
-        <div className="flex w-full absolute top-[13%] left-[12%] z-50 gap-x-[70px]">
+      {snap.page === PAGES.joinus && !snap.model && (
+        <div className="flex w-full absolute top-[18%] left-[15%] z-50 gap-x-[70px]">
           <div className="relative">
-            <img src="/images/icon/comet-bg.png" className="w-[320px]" />
+            <img src="/images/icon/comet-bg.png" className="w-[280px]" />
             <img
               className="absolute top-[20%] w-[360px] left-[-1.5%]"
               src="/images/products/machines/comet.png"
@@ -774,7 +774,7 @@ export const JoinUs = () => {
             </div>
           </div>
           <div className="relative">
-            <img src="/images/icon/filament-bg.png" className="w-[320px]" />
+            <img src="/images/icon/filament-bg.png" className="w-[280px]" />
             <img
               className="absolute top-[10%] w-[360px] left-[0%]"
               src="/images/products/machines/filament.png"
@@ -799,16 +799,16 @@ export const JoinUs = () => {
               </p>
             </div>
 
-            <div className="flex flex-col gap-y-2 absolute top-[63%] left-[26%] text-center">
+            <div className="flex flex-col gap-y-2 absolute top-[60%] left-[23%] text-center">
               <p className="text-white">7 Machines</p>
               <p className="text-white">Weekly Drops</p>
               <p className="text-white">Private MOGUL Room</p>
             </div>
           </div>
           <div className="relative">
-            <img src="/images/icon/fusion-bg.png" className="w-[320px]" />
+            <img src="/images/icon/fusion-bg.png" className="w-[280px]" />
             <img
-              className="absolute top-[35%] w-[250px] left-[10%]"
+              className="absolute top-[35%] w-[200px] left-[15%]"
               src="/images/products/machines/dreamfire.png"
             />
             <div className="absolute top-[83%] left-[20%]">
@@ -833,7 +833,7 @@ export const JoinUs = () => {
                 1/997
               </p>
             </div>
-            <div className="flex flex-col gap-y-2 absolute top-[52%] left-[28%] text-center">
+            <div className="flex flex-col gap-y-1 absolute top-[52%] left-[28%] text-center">
               <p className="text-white">Limited</p>
               <p className="text-white">12 Packs</p>
               <p className="text-white">9 Machines</p>
