@@ -747,7 +747,7 @@ export const JoinUs = () => {
         </div>
       )}
       {snap.page === PAGES.joinus && !snap.model && (
-        <div className="flex w-full absolute md:top-[15%] md:left-[5%] lg:top-[12%] lg:left-[5%] xl:left-[12%] gap-x-[50px]  z-50 md:gap-x-[50px]">
+        <div className="flex w-full m-auto absolute md:top-[15%] md:left-[5%] lg:top-[12%] lg:left-[5%] xl:left-[12%] gap-x-[50px]  z-50 md:gap-x-[50px]">
           <div className="relative">
             <img
               src="/images/icon/comet-bg.png"
