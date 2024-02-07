@@ -747,7 +747,7 @@ export const JoinUs = () => {
         </div>
       )}
       {snap.page === PAGES.joinus && !snap.model && (
-        <div className="flex w-full absolute md:left-[5%] lg:top-[15%] lg:left-[5%] xl:left-[15%] gap-x-[50px]  z-50 md:gap-x-[50px]">
+        <div className="flex w-full absolute md:top-[15%] md:left-[5%] lg:top-[15%] lg:left-[5%] xl:left-[12%] gap-x-[50px]  z-50 md:gap-x-[50px]">
           <div className="relative">
             <img
               src="/images/icon/comet-bg.png"
@@ -820,7 +820,7 @@ export const JoinUs = () => {
               className="absolute top-[35%] w-[200px] lg:left-[10%] xl:left-[15%] md:left-[10%]"
               src="/images/products/machines/dreamfire.png"
             />
-            <div className="absolute top-[83%] lg:left-[23%] xl:left-[20%] md:left-[25%]">
+            <div className="absolute top-[83%] lg:left-[23%] xl:left-[23%] md:left-[25%]">
               <CustomButton
                 type="outline"
                 title="JOIN NOW"
@@ -842,7 +842,7 @@ export const JoinUs = () => {
                 1/997
               </p>
             </div>
-            <div className="flex flex-col md:gap-y-0 gap-y-1  absolute top-[52%] lg:left-[25%] md:left-[25%] xl:left-[32%] text-center">
+            <div className="flex flex-col md:gap-y-0 gap-y-1  absolute top-[52%] lg:left-[25%] md:left-[25%] xl:left-[27%] text-center">
               <p className="text-white md:text-[14px]">Limited</p>
               <p className="text-white md:text-[14px]">12 Packs</p>
               <p className="text-white md:text-[14px]">9 Machines</p>
