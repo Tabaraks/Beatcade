@@ -7,7 +7,8 @@ import Customizer from "./pages/Customizer";
 import ContactForm from "./pages/ContactForm";
 import state, { PAGES } from "./store";
 import Loader from "./pages/Loader";
-import Home from "./pages/Home";
+import Home from "./pages/home";
+import { JoinUs } from "./pages/home/JoinUs";
 
 function Main() {
   const snap = useSnapshot(state);
@@ -44,6 +45,7 @@ function Main() {
       )}
 
       {snap.page === PAGES.intro && <Home />}
+      {snap.page === PAGES.joinus && <JoinUs />}
 
       {snap.page !== PAGES.loading && <Canvas assets={assets} />}
 

@@ -132,10 +132,11 @@ const Scene = () => {
       <CameraRig>
         {/* <Center> */}
         <group position={[-0, 0, 0]} ref={groupRef}>
-          {snap.model === "" && <Drums />}
+          {snap.model === "" && snap.page !== PAGES.joinus && <Drums />}
           {snap.model === "Packs" && <Packs />}
           {snap.model === "Machines" && <Machines />}
           {snap.model === "Battles" && <Battles />}
+          {snap.page === PAGES.joinus && snap.model === "" && <></>}
         </group>
         {/* </Center> */}
       </CameraRig>

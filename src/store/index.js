@@ -1,9 +1,10 @@
 import { proxy } from "valtio";
 
 export const PAGES = {
-    loading: 0x00,
-    intro: 0x01,
-    customize: 0x02,
+  loading: 0x00,
+  intro: 0x01,
+  customize: 0x02,
+  joinus: 0x03,
 };
 
 // export const MODELS = {
@@ -14,18 +15,18 @@ export const PAGES = {
 // };
 
 const state = proxy({
-    page: PAGES.loading,
-    color: "#043467",
-    enableMenu: false,
-    disappear: false,
-    fullscreen: false,
-    model: "",
-    modelId: "1",
+  page: PAGES.loading,
+  color: "#043467",
+  enableMenu: false,
+  disappear: false,
+  fullscreen: false,
+  model: "",
+  modelId: "1",
 
-    // subscribing: false,
-    // isLogoTexture: true,
-    // isFullTexture: false,
-    // materialType: "wood",
+  // subscribing: false,
+  // isLogoTexture: true,
+  // isFullTexture: false,
+  // materialType: "wood",
 });
 
 export default state;
