@@ -3,9 +3,7 @@ import { useSnapshot } from "valtio";
 import * as Tone from "tone";
 import state, { PAGES } from "../../store";
 import { CustomButton } from "../../components";
-import { useNavigate } from "react-router-dom";
 import {
-  headContainerAnimation,
   headContentAnimation,
   headTextAnimation,
   slideAnimation,
@@ -16,7 +14,7 @@ import MyData from "../../config/data.json";
 import { useEffect, useState } from "react";
 import { BattleDescription } from "./BattleDescription";
 
-const Home = () => {
+export const JoinUs = () => {
   const [dropTime, setDropTime] = useState({
     day: 0,
     hour: 0,
@@ -157,7 +155,6 @@ const Home = () => {
   // useEffect(() => {
   //   console.log("kky", modelState);
   // }, [modelState])
-
   const playAudio = (imageName) => {
     const audioPath =
       snap.model === "Packs" && modelState.colorName === "iconic"
@@ -358,8 +355,8 @@ const Home = () => {
           <motion.div {...slideAnimation("left")}>
             <div className="absolute flex flex-row gap-[8px] items-center ">
               {/* <p className='text-white text-[60px] font-medium tracking-[20px] cursor-pointer pointer-events-auto'
-                onClick={goHomePage}
-              >BEATCADE™</p> */}
+              onClick={goHomePage}
+            >BEATCADE™</p> */}
               <img
                 className="w-[25vw] object-contain cursor-pointer pointer-events-auto"
                 style={snap.fullscreen ? { opacity: 0.3 } : { opacity: 1 }}
@@ -383,42 +380,43 @@ const Home = () => {
                 <p className="text-[#ADDFFF] font-[Whangarei] leading-[4vw] text-[4vw] font-normal  tracking-[-1.52px]">
                   VOYAGER
                 </p>
-                {snap.model !== "Join Now"}
-                <div className=" flex flex-col  items-center">
-                  <p className="text-[#ADDFFF] text-[17px] font-[Whangarei] font-normal tracking-[-0.72px] leading-[0px] uppercase">
-                    Next Drop
-                  </p>
-                  \
-                  <p className="text-[#fff] text-[12px] font-normal tracking-[-0.46px] leading-[0px] ">
-                    {dropTime.day}d {dropTime.hour}h {dropTime.minute}m{" "}
-                    {dropTime.second}s
-                  </p>
-                </div>
+                {snap.page !== PAGES.joinus && (
+                  <div className=" flex flex-col  items-center">
+                    <p className="text-[#ADDFFF] text-[17px] font-[Whangarei] font-normal tracking-[-0.72px] leading-[0px] uppercase">
+                      Next Drop
+                    </p>
+                    \
+                    <p className="text-[#fff] text-[12px] font-normal tracking-[-0.46px] leading-[0px] ">
+                      {dropTime.day}d {dropTime.hour}h {dropTime.minute}m{" "}
+                      {dropTime.second}s
+                    </p>
+                  </div>
+                )}
               </div>
             </motion.div>
+            {snap.page !== PAGES.joinus && (
+              <motion.div
+                {...headContentAnimation}
+                className="flex flex-row gap-[1.5vw]"
+              >
+                <CustomButton
+                  type="outline"
+                  title="JOIN NOW"
+                  customStyles="outl font-bold"
+                  icon="trophy"
+                  iconPos="start"
+                ></CustomButton>
 
-            <motion.div
-              {...headContentAnimation}
-              className="flex flex-row gap-[1.5vw]"
-            >
-              <CustomButton
-                type="outline"
-                title="JOIN NOW"
-                // handleClick={() => state.subscribing = true}
-                customStyles="outl font-bold"
-                icon="trophy"
-                iconPos="start"
-              ></CustomButton>
-
-              <CustomButton
-                type="filled"
-                title="START TOUR"
-                // handleClick={() => state.page = PAGES.customize}
-                customStyles="fill font-bold"
-                icon="play"
-                iconPos="end"
-              />
-            </motion.div>
+                <CustomButton
+                  type="filled"
+                  title="START TOUR"
+                  // handleClick={() => state.page = PAGES.customize}
+                  customStyles="fill font-bold"
+                  icon="play"
+                  iconPos="end"
+                />
+              </motion.div>
+            )}
           </motion.div>
 
           <motion.div
@@ -681,69 +679,170 @@ const Home = () => {
           )}
         </div>
       )}
-      <div className="flex-col absolute right-[45%] top-[77%] z-50">
-        <p className="text-white font-bold text-[19px] mb-0 text-center">
-          {audioName.includes(".")
-            ? audioName.substring(0, audioName.indexOf("."))
-            : audioName}
-        </p>
-        <p className="text-white text-[13px] mb-0 text-center">
-          {` Artist Name: ${
-            audioName.includes(".")
+      {snap.page !== PAGES.joinus && (
+        <div className="flex-col absolute right-[45%] top-[77%] z-50">
+          <p className="text-white font-bold text-[19px] mb-0 text-center">
+            {audioName.includes(".")
               ? audioName.substring(0, audioName.indexOf("."))
-              : audioName
-          }`}
-        </p>
-        <div className="w-full h-1 bg-gray-200 rounded overflow-hidden mt-2">
-          <div
-            className="h-full bg-blue-500"
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
-        <div className="flex mt-2 gap-x-3 justify-center items-center">
-          <div className="flex">
-            <img
-              src="/images/icon/prev.svg"
-              className="w-[5vh] cursor-pointer"
-              onClick={handlePrevious}
-            />
-            <img
-              src={`${
-                !isPlaying ? "/images/icon/play.svg" : "/images/icon/pause.svg"
-              }`}
-              className="w-[6vh] cursor-pointer"
-              onClick={togglePlay}
-            />
-            <img
-              src="/images/icon/next.svg"
-              className="w-[5vh] cursor-pointer"
-              onClick={handleNext}
-            />
+              : audioName}
+          </p>
+          <p className="text-white text-[13px] mb-0 text-center">
+            {` Artist Name: ${
+              audioName.includes(".")
+                ? audioName.substring(0, audioName.indexOf("."))
+                : audioName
+            }`}
+          </p>
+          <div className="w-full h-1 bg-gray-200 rounded overflow-hidden mt-2">
+            <div
+              className="h-full bg-blue-500"
+              style={{ width: `${progress}%` }}
+            ></div>
           </div>
-          <div className="flex items-center">
-            <img
-              onClick={() => {
-                setVolume(!sound ? 1 : 0);
-                setSound(!sound);
-              }}
-              src={`${
-                sound ? "/images/icon/speaker.svg" : "/images/icon/mute.svg"
-              }`}
-              alt="Speaker Icon"
-              className="w-6 mr-2"
-            />
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={volume}
-              onChange={handleVolumeChange}
-              className="w-14 h-1 bg-gray-300 rounded-lg appearance-none focus:outline-none"
-            />
+          <div className="flex mt-2 gap-x-3 justify-center items-center">
+            <div className="flex">
+              <img
+                src="/images/icon/prev.svg"
+                className="w-[5vh] cursor-pointer"
+                onClick={handlePrevious}
+              />
+              <img
+                src={`${
+                  !isPlaying
+                    ? "/images/icon/play.svg"
+                    : "/images/icon/pause.svg"
+                }`}
+                className="w-[6vh] cursor-pointer"
+                onClick={togglePlay}
+              />
+              <img
+                src="/images/icon/next.svg"
+                className="w-[5vh] cursor-pointer"
+                onClick={handleNext}
+              />
+            </div>
+            <div className="flex items-center">
+              <img
+                onClick={() => {
+                  setVolume(!sound ? 1 : 0);
+                  setSound(!sound);
+                }}
+                src={`${
+                  sound ? "/images/icon/speaker.svg" : "/images/icon/mute.svg"
+                }`}
+                alt="Speaker Icon"
+                className="w-6 mr-2"
+              />
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+                className="w-14 h-1 bg-gray-300 rounded-lg appearance-none focus:outline-none"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
+      {snap.page === PAGES.joinus && (
+        <div className="flex w-full absolute top-[13%] left-[12%] z-50 gap-x-[70px]">
+          <div className="relative">
+            <img src="/images/icon/comet-bg.png" className="w-[320px]" />
+            <img
+              className="absolute top-[20%] w-[360px] left-[-1.5%]"
+              src="/images/products/machines/comet.png"
+            />
+            <div className="absolute top-[83%] left-[20%]">
+              <CustomButton
+                type="outline"
+                title="JOIN NOW"
+                customStyles="!border-[#AFF1FF] font-bold"
+                icon="trophy"
+                iconPos="start"
+              />
+            </div>
+            <div className="absolute top-[5%] left-[22%]">
+              <p className="text-[#9AF6F1] drop-shadow-[0_0_8.2px_#9AF6F1] font-['Atyp Display'] font-bold text-[36px]">
+                CREATOR
+              </p>
+            </div>
+            <div className="flex flex-col gap-y-2 absolute top-[60%] left-[30%] text-center">
+              <p className="text-white">2 Machines</p>
+              <p className="text-white">Weekly Drops</p>
+            </div>
+          </div>
+          <div className="relative">
+            <img src="/images/icon/filament-bg.png" className="w-[320px]" />
+            <img
+              className="absolute top-[10%] w-[360px] left-[0%]"
+              src="/images/products/machines/filament.png"
+            />
+            <div className="absolute top-[83%] right-[20%]">
+              <CustomButton
+                type="outline"
+                title="JOIN NOW"
+                customStyles="!border-[#FFDC4A] font-bold"
+                icon="trophy"
+                iconPos="start"
+              />
+            </div>
+            <div className="absolute top-[3%] right-[7%]">
+              <p className="text-[#864AE8] drop-shadow-[0_0_8.2px_#864AE8] font-['Atyp Display'] font-bold text-[10px]">
+                $30/m
+              </p>
+            </div>
+            <div className="absolute top-[5%] left-[31.5%]">
+              <p className="text-[#864AE8] drop-shadow-[0_0_8.2px_#864AE8] font-['Atyp Display'] font-bold text-[36px]">
+                MOGUL
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-y-2 absolute top-[63%] left-[26%] text-center">
+              <p className="text-white">7 Machines</p>
+              <p className="text-white">Weekly Drops</p>
+              <p className="text-white">Private MOGUL Room</p>
+            </div>
+          </div>
+          <div className="relative">
+            <img src="/images/icon/fusion-bg.png" className="w-[320px]" />
+            <img
+              className="absolute top-[35%] w-[250px] left-[10%]"
+              src="/images/products/machines/dreamfire.png"
+            />
+            <div className="absolute top-[83%] left-[20%]">
+              <CustomButton
+                type="outline"
+                title="JOIN NOW"
+                customStyles="!border-[#864AE8] font-bold"
+                icon="trophy"
+                iconPos="start"
+              />
+            </div>
+            <div className="absolute top-[3%] right-[7%]">
+              <p className="text-[#FFF6D0] drop-shadow-[0_0_8.2px_#FFF6D0] font-['Atyp Display'] font-bold text-[10px]">
+                $779
+              </p>
+            </div>
+            <div className="absolute top-[5%] left-[35%] flex flex-col items-center gap-y-6">
+              <p className="text-[#FFF6D0] drop-shadow-[0_0_8.2px_#FFF6D0] font-['Atyp Display'] font-bold text-[36px]">
+                ICON
+              </p>
+              <p className="text-[#FFF6D0] drop-shadow-[0_0_8.2px_#FFF6D0] font-['Atyp Display'] font-bold text-[22px]">
+                1/997
+              </p>
+            </div>
+            <div className="flex flex-col gap-y-2 absolute top-[52%] left-[28%] text-center">
+              <p className="text-white">Limited</p>
+              <p className="text-white">12 Packs</p>
+              <p className="text-white">9 Machines</p>
+              <p className="text-white">Weekly Drops</p>
+              <p className="text-white">Private ICON Room</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {snap.model === "Packs" && snap.enableMenu === false && modelState && (
         <div className="absolute flex flex-col left-[52vw] top-[25vh] xl:top-[30vh] w-[34vw] xl:w-[27vw] gap-[0px]">
@@ -776,5 +875,3 @@ const Home = () => {
     </AnimatePresence>
   );
 };
-
-export default Home;

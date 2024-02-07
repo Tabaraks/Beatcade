@@ -1,11 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useSnapshot } from "valtio";
 import * as Tone from "tone";
-import state, { PAGES } from "../../store";
+import state from "../../store";
 import { CustomButton } from "../../components";
-import { useNavigate } from "react-router-dom";
 import {
-  headContainerAnimation,
   headContentAnimation,
   headTextAnimation,
   slideAnimation,
@@ -16,7 +14,7 @@ import MyData from "../../config/data.json";
 import { useEffect, useState } from "react";
 import { BattleDescription } from "./BattleDescription";
 
-const Home = () => {
+export const Home = () => {
   const [dropTime, setDropTime] = useState({
     day: 0,
     hour: 0,
@@ -157,7 +155,6 @@ const Home = () => {
   // useEffect(() => {
   //   console.log("kky", modelState);
   // }, [modelState])
-
   const playAudio = (imageName) => {
     const audioPath =
       snap.model === "Packs" && modelState.colorName === "iconic"
@@ -358,8 +355,8 @@ const Home = () => {
           <motion.div {...slideAnimation("left")}>
             <div className="absolute flex flex-row gap-[8px] items-center ">
               {/* <p className='text-white text-[60px] font-medium tracking-[20px] cursor-pointer pointer-events-auto'
-                onClick={goHomePage}
-              >BEATCADE™</p> */}
+              onClick={goHomePage}
+            >BEATCADE™</p> */}
               <img
                 className="w-[25vw] object-contain cursor-pointer pointer-events-auto"
                 style={snap.fullscreen ? { opacity: 0.3 } : { opacity: 1 }}
@@ -383,7 +380,6 @@ const Home = () => {
                 <p className="text-[#ADDFFF] font-[Whangarei] leading-[4vw] text-[4vw] font-normal  tracking-[-1.52px]">
                   VOYAGER
                 </p>
-                {snap.model !== "Join Now"}
                 <div className=" flex flex-col  items-center">
                   <p className="text-[#ADDFFF] text-[17px] font-[Whangarei] font-normal tracking-[-0.72px] leading-[0px] uppercase">
                     Next Drop
@@ -404,11 +400,10 @@ const Home = () => {
               <CustomButton
                 type="outline"
                 title="JOIN NOW"
-                // handleClick={() => state.subscribing = true}
                 customStyles="outl font-bold"
                 icon="trophy"
                 iconPos="start"
-              ></CustomButton>
+              />
 
               <CustomButton
                 type="filled"
@@ -776,5 +771,3 @@ const Home = () => {
     </AnimatePresence>
   );
 };
-
-export default Home;
