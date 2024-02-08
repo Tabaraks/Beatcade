@@ -1,16 +1,15 @@
 import * as Tone from "tone";
 import { inputToNote, noteToInput } from "../../helper/midi";
 export class AudioManager {
-  constructor(url) {
+  constructor(urls) {
     this.sustain = false;
     this.synthQueue = [];
-    // this.sampler = null;
-    this.initSampler();
+    this.initSampler(urls);
   }
-  initSampler = function () {
+  initSampler = function (urls) {
     return new Promise((resolve, reject) => {
       const samplerTemp = new Tone.Sampler({
-        urls: {
+        urls: urls ?? {
           C3: "C3.13.mp3",
           "D#3": "Eb3.16.mp3",
           "F#3": "Gb.19.mp3",
@@ -68,6 +67,10 @@ export class AudioManager {
     } else {
       this.sampler.triggerRelease(inputToNote(input), Tone.now());
     }
+  };
+
+  updateUrls = function (urls) {
+    this.initSampler(urls);
   };
 
   releaseSustainPedal = function () {

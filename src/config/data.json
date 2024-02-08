@@ -121,56 +121,56 @@
         "modelUrl": "/models/products/machines/voyager.glb"
       },
       {
-        "id": "1",
+        "id": "2",
         "name": "dreamfire",
         "colorName": "legendary",
         "imgUrl": "/images/products/machines/dreamfire.png",
         "modelUrl": "/models/products/machines/dreamfire.glb"
       },
       {
-        "id": "2",
+        "id": "3",
         "name": "fusion",
         "colorName": "legendary",
         "imgUrl": "/images/products/machines/fusion.png",
         "modelUrl": "/models/products/machines/dreamfire.glb"
       },
       {
-        "id": "3",
+        "id": "4",
         "name": "eclipse",
         "colorName": "epic",
         "imgUrl": "/images/products/machines/eclipse.png",
         "modelUrl": "/models/products/machines/dreamfire.glb"
       },
       {
-        "id": "4",
+        "id": "5",
         "name": "filament",
         "colorName": "epic",
         "imgUrl": "/images/products/machines/filament.png",
         "modelUrl": "/models/products/machines/dreamfire.glb"
       },
       {
-        "id": "5",
+        "id": "6",
         "name": "comet",
         "colorName": "rare",
         "imgUrl": "/images/products/machines/comet.png",
         "modelUrl": "/models/products/machines/dreamfire.glb"
       },
       {
-        "id": "6",
+        "id": "7",
         "name": "rare",
         "colorName": "legendary",
         "imgUrl": "/images/products/machines/void.png",
         "modelUrl": "/models/products/machines/dreamfire.glb"
       },
       {
-        "id": "7",
+        "id": "8",
         "name": "quantam",
         "colorName": "common",
         "imgUrl": "/images/products/machines/quantam.png",
         "modelUrl": "/models/products/machines/dreamfire.glb"
       },
       {
-        "id": "8",
+        "id": "9",
         "name": "temporal",
         "colorName": "common",
         "imgUrl": "/images/products/machines/temporal.png",

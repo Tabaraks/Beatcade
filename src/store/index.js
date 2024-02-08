@@ -22,6 +22,7 @@ const state = proxy({
   fullscreen: false,
   model: "",
   modelId: "1",
+  btnColor: "",
 
   // subscribing: false,
   // isLogoTexture: true,

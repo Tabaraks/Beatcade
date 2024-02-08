@@ -15,25 +15,9 @@ const Machines = () => {
 
   const { scene, nodes, materials } = useGLTF("/models/machines/piano.glb");
 
-  const keyManager = new KeyManager(scene, materials, camera);
-
-  const handleKeyDown = (event) => {
-    keyManager.playSoundOnPress(event.key.toUpperCase());
-  };
-
-  const handleKeyUp = (event) => {
-    keyManager.stopSoundOnRelease(event.key.toUpperCase());
-  };
-
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    };
-  }, [handleKeyDown, handleKeyUp]);
+    const keyManager = new KeyManager(scene, materials, camera, snap.btnColor);
+  }, [snap.btnColor]);
 
   return (
     <group

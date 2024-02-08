@@ -3,6 +3,7 @@ import { useSnapshot } from "valtio";
 import * as Tone from "tone";
 import state, { PAGES } from "../../store";
 import { CustomButton } from "../../components";
+import { AudioManager } from "../canvas/AudioManager";
 import { useNavigate } from "react-router-dom";
 import {
   headContainerAnimation,
@@ -39,6 +40,8 @@ const Home = () => {
 
   const [progress, setProgress] = useState(0);
 
+  const [imageName, setImageName] = useState("");
+
   const [startTime, setStartTime] = useState(null);
 
   const [volume, setVolume] = useState(0.5);
@@ -46,6 +49,7 @@ const Home = () => {
   const [sound, setSound] = useState(true);
 
   const [manageProgress, setManageProgress] = useState();
+  const [urls, setUrls] = useState({});
 
   const [isPlaying, setIsPlaying] = useState({
     gold: false,
@@ -93,6 +97,46 @@ const Home = () => {
     "Blue Play": "KickStem3.wav",
     "Green Play": "PercStem3.wav",
     "White Play": "BassStem3.wav",
+  };
+
+  const gold = {
+    C3: "IO.wav",
+    "D#3": "Kerberos.wav",
+    "F#3": "Luna.wav",
+    A3: "Lapetus.wav",
+    C4: "Deimos.wav",
+  };
+
+  const purple = {
+    C3: "Saw-1.wav",
+    "D#3": "Saw-2.wav",
+    "F#3": "Saw-3.wav",
+    A3: "Saw-4.wav",
+    C4: "Saw-5.wav",
+  };
+
+  const blue = {
+    C3: "Neso.wav",
+    "D#3": "sem.wav",
+    "F#3": "rhea.wav",
+    A3: "ariel.wav",
+    C4: "tital.wav",
+  };
+
+  const green = {
+    C3: "FullMix1.wav",
+    "D#3": "Fullmix2.wav",
+    "F#3": "Keysstem.wav",
+    A3: "Percstem.wav",
+    C4: "FullMix.wav",
+  };
+
+  const white = {
+    C3: "HiHatStem3.wav",
+    "D#3": "KeysStem3.wav",
+    "F#3": "KickStem3.wav",
+    A3: "PercStem3.wav",
+    C4: "BassStem3.wav",
   };
 
   useEffect(() => {
@@ -161,18 +205,21 @@ const Home = () => {
 
   const playAudio = (imageName) => {
     const audioPath =
-      snap.model === "Packs" && modelState.colorName === "iconic"
-        ? iconic[imageName]
-        : modelState.colorName === "legendary"
-        ? legendary[imageName]
-        : modelState.colorName === "epic"
-        ? epic[imageName]
-        : modelState.colorName === "rare"
-        ? rare[imageName]
-        : modelState.colorName === "common"
-        ? common[imageName]
-        : rare[imageName];
+      snap.model === "Packs" && snap.model !== "Machines"
+        ? modelState.colorName === "iconic"
+          ? iconic[imageName]
+          : modelState.colorName === "legendary"
+          ? legendary[imageName]
+          : modelState.colorName === "epic"
+          ? epic[imageName]
+          : modelState.colorName === "rare"
+          ? rare[imageName]
+          : modelState.colorName === "common"
+          ? common[imageName]
+          : rare[imageName]
+        : {};
     setAudioName(audioPath);
+    setImageName(imageName);
     if (audioPath) {
       if (currentPlayer) {
         currentPlayer.stop();
@@ -252,6 +299,30 @@ const Home = () => {
     }
   };
 
+  const setUrlsBasedOnImage = (imageName) => {
+    let newUrls = {};
+    switch (imageName) {
+      case "Gold Play":
+        newUrls = gold;
+        break;
+      case "Purple Play":
+        newUrls = purple;
+        break;
+      case "Blue Play":
+        newUrls = blue;
+        break;
+      case "Green Play":
+        newUrls = green;
+        break;
+      case "White Play":
+        newUrls = white;
+        break;
+      default:
+        break;
+    }
+    setUrls(newUrls);
+  };
+
   const handlePrevious = () => {
     const previousIndex =
       (currentIndex - 1 + imageNames.length) % imageNames.length;
@@ -289,7 +360,6 @@ const Home = () => {
   const togglePlay = () => {
     if (currentPlayer) {
       if (isPlaying) {
-        // Pause the music and save the playback position
         currentPlayer.stop();
         setStartTime(Tone.now());
         setManageProgress(null);
@@ -351,6 +421,10 @@ const Home = () => {
   useEffect(() => {
     Tone.Destination.volume.value = Tone.gainToDb(volume);
   }, [volume]);
+
+  useEffect(() => {
+    state.btnColor = imageName;
+  }, [imageName]);
 
   return (
     <AnimatePresence>
@@ -682,69 +756,73 @@ const Home = () => {
           )}
         </div>
       )}
-      <div className="flex-col absolute right-[45%] top-[77%] z-50">
-        <p className="text-white font-bold text-[19px] mb-0 text-center">
-          {audioName.includes(".")
-            ? audioName.substring(0, audioName.indexOf("."))
-            : audioName}
-        </p>
-        <p className="text-white text-[13px] mb-0 text-center">
-          {` Artist Name: ${
-            audioName.includes(".")
+      {snap.model === "Packs" && (
+        <div className="flex-col absolute right-[45%] top-[77%] z-50">
+          <p className="text-white font-bold text-[19px] mb-0 text-center">
+            {audioName.includes(".")
               ? audioName.substring(0, audioName.indexOf("."))
-              : audioName
-          }`}
-        </p>
-        <div className="w-full h-1 bg-gray-200 rounded overflow-hidden mt-2">
-          <div
-            className="h-full bg-blue-500"
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
-        <div className="flex mt-2 gap-x-3 justify-center items-center">
-          <div className="flex">
-            <img
-              src="/images/icon/prev.svg"
-              className="w-[5vh] cursor-pointer"
-              onClick={handlePrevious}
-            />
-            <img
-              src={`${
-                !isPlaying ? "/images/icon/play.svg" : "/images/icon/pause.svg"
-              }`}
-              className="w-[6vh] cursor-pointer"
-              onClick={togglePlay}
-            />
-            <img
-              src="/images/icon/next.svg"
-              className="w-[5vh] cursor-pointer"
-              onClick={handleNext}
-            />
+              : audioName}
+          </p>
+          <p className="text-white text-[13px] mb-0 text-center">
+            {` Artist Name: ${
+              audioName.includes(".")
+                ? audioName.substring(0, audioName.indexOf("."))
+                : audioName
+            }`}
+          </p>
+          <div className="w-full h-1 bg-gray-200 rounded overflow-hidden mt-2">
+            <div
+              className="h-full bg-blue-500"
+              style={{ width: `${progress}%` }}
+            ></div>
           </div>
-          <div className="flex items-center">
-            <img
-              onClick={() => {
-                setVolume(!sound ? 1 : 0);
-                setSound(!sound);
-              }}
-              src={`${
-                sound ? "/images/icon/speaker.svg" : "/images/icon/mute.svg"
-              }`}
-              alt="Speaker Icon"
-              className="w-6 mr-2"
-            />
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={volume}
-              onChange={handleVolumeChange}
-              className="w-14 h-1 bg-gray-300 rounded-lg appearance-none focus:outline-none"
-            />
+          <div className="flex mt-2 gap-x-3 justify-center items-center">
+            <div className="flex">
+              <img
+                src="/images/icon/prev.svg"
+                className="w-[5vh] cursor-pointer"
+                onClick={handlePrevious}
+              />
+              <img
+                src={`${
+                  !isPlaying
+                    ? "/images/icon/play.svg"
+                    : "/images/icon/pause.svg"
+                }`}
+                className="w-[6vh] cursor-pointer"
+                onClick={togglePlay}
+              />
+              <img
+                src="/images/icon/next.svg"
+                className="w-[5vh] cursor-pointer"
+                onClick={handleNext}
+              />
+            </div>
+            <div className="flex items-center">
+              <img
+                onClick={() => {
+                  setVolume(!sound ? 1 : 0);
+                  setSound(!sound);
+                }}
+                src={`${
+                  sound ? "/images/icon/speaker.svg" : "/images/icon/mute.svg"
+                }`}
+                alt="Speaker Icon"
+                className="w-6 mr-2"
+              />
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+                className="w-14 h-1 bg-gray-300 rounded-lg appearance-none focus:outline-none"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {snap.model === "Packs" && snap.enableMenu === false && modelState && (
         <div className="absolute flex flex-col left-[52vw] top-[25vh] xl:top-[30vh] w-[34vw] xl:w-[27vw] gap-[0px]">
