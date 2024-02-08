@@ -41,21 +41,26 @@ export const Card = ({
   customClass,
 }) => {
   const color = MyData.colors[colorName];
+  const shadowStyle = {
+    '--box-shadow-color': color,
+  };
 
   return (
     <div
-      className={`relative w-[163px] flex flex-col items-center h-fit gap-[5vh] cursor-pointer ${customClass} transform transition-transform hover:scale-110 `}
+      className={`relative w-[163px] flex flex-col items-center h-fit gap-[5vh] cursor-pointer ${customClass} `}
       onClick={onClickProps}
       
     >
       <VectorIcon color={color} />
       <div
-        className="w-[10vw] h-[20vh] flex flex-col border"
-        style={
-          isSelected
-            ? { boxShadow: `0px 0px 25px 3px ${color}`, borderColor: color }
-            : { borderColor: "#333" }
-        }
+        className={`w-[10vw] h-[20vh] flex flex-col border  hover:shadow-custom`}
+        style={{
+          
+          borderColor: isSelected ? color : "#333",
+          transition: "box-shadow 0.1s ease-in-out",
+          boxShadow:isSelected?`0px 0px 25px 3px ${color}`:'',
+          ...shadowStyle
+        }}
       >
         <div className="h-[142px] flex justify-center items-center ">
           <img
