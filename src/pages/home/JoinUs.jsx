@@ -394,29 +394,30 @@ export const JoinUs = () => {
                 )}
               </div>
             </motion.div>
-            {snap.page !== PAGES.joinus && (
-              <motion.div
-                {...headContentAnimation}
-                className="flex flex-row gap-[1.5vw]"
-              >
-                <CustomButton
-                  type="outline"
-                  title="JOIN NOW"
-                  customStyles="outl font-bold"
-                  icon="trophy"
-                  iconPos="start"
-                ></CustomButton>
+            {snap.page !== PAGES.joinus ||
+              (snap.model && (
+                <motion.div
+                  {...headContentAnimation}
+                  className="flex flex-row gap-[1.5vw]"
+                >
+                  <CustomButton
+                    type="outline"
+                    title="JOIN NOW"
+                    customStyles="outl font-bold"
+                    icon="trophy"
+                    iconPos="start"
+                  ></CustomButton>
 
-                <CustomButton
-                  type="filled"
-                  title="START TOUR"
-                  // handleClick={() => state.page = PAGES.customize}
-                  customStyles="fill font-bold"
-                  icon="play"
-                  iconPos="end"
-                />
-              </motion.div>
-            )}
+                  <CustomButton
+                    type="filled"
+                    title="START TOUR"
+                    // handleClick={() => state.page = PAGES.customize}
+                    customStyles="fill font-bold"
+                    icon="play"
+                    iconPos="end"
+                  />
+                </motion.div>
+              ))}
           </motion.div>
 
           <motion.div
@@ -679,7 +680,7 @@ export const JoinUs = () => {
           )}
         </div>
       )}
-      {snap.page !== PAGES.joinus && (
+      {snap.page !== PAGES.joinus || snap.model && (
         <div className="flex-col absolute right-[45%] top-[77%] z-50">
           <p className="text-white font-bold text-[19px] mb-0 text-center">
             {audioName.includes(".")
@@ -747,7 +748,7 @@ export const JoinUs = () => {
         </div>
       )}
       {snap.page === PAGES.joinus && !snap.model && (
-        <div className="flex w-full absolute md:top-[15%] md:left-[5%] lg:top-[15%] lg:left-[5%] xl:left-[12%] gap-x-[50px]  z-50 md:gap-x-[50px]">
+        <div className="flex w-full m-auto absolute md:top-[15%] md:left-[5%] lg:top-[12%] lg:left-[5%] xl:left-[12%] gap-x-[50px]  z-50 md:gap-x-[50px]">
           <div className="relative">
             <img
               src="/images/icon/comet-bg.png"
@@ -757,7 +758,7 @@ export const JoinUs = () => {
               className="absolute top-[20%] w-[360px] left-[-1.5%]"
               src="/images/products/machines/comet.png"
             />
-            <div className="absolute top-[83%] left-[23%] md:left-[23%]">
+            <div className="absolute top-[83%] left-[23%] xl:left-[17%] md:left-[23%]">
               <CustomButton
                 type="outline"
                 title="JOIN NOW"
@@ -766,7 +767,7 @@ export const JoinUs = () => {
                 iconPos="start"
               />
             </div>
-            <div className="absolute top-[5%] lg:left-[22%] md:left-[13%]">
+            <div className="absolute top-[5%] lg:left-[18%] md:left-[13%]">
               <p className="text-[#9AF6F1] drop-shadow-[0_0_8.2px_#9AF6F1] font-['Atyp Display'] font-bold text-[36px]">
                 CREATOR
               </p>
@@ -785,7 +786,7 @@ export const JoinUs = () => {
               className="absolute top-[10%] w-[360px] left-[0%]"
               src="/images/products/machines/filament.png"
             />
-            <div className="absolute top-[83%] right-[20%] md:right-[25%]">
+            <div className="absolute top-[83%] right-[20%] xl:right-[20%] md:right-[25%]">
               <CustomButton
                 type="outline"
                 title="JOIN NOW"
@@ -799,7 +800,7 @@ export const JoinUs = () => {
                 $30/m
               </p>
             </div>
-            <div className="absolute top-[5%] lg:left-[30.5%] md:left-[20.5%]">
+            <div className="absolute top-[5%] lg:left-[26%] md:left-[20.5%]">
               <p className="text-[#864AE8] drop-shadow-[0_0_8.2px_#864AE8] font-['Atyp Display'] font-bold text-[36px]">
                 MOGUL
               </p>
