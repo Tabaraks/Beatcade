@@ -38,7 +38,12 @@ const CustomButton = ({
       className={`w-[12vw] h-[3.3vw] p-[0.6vw 0.83px] justify-center align-center gap-[0.5vw] flex items-center ${customStyles} border-[0.36vw] rounded-[1.2vw] text-[1.2vw]`}
       style={generateStyle(type)}
       onClick={() => {
-        title === "JOIN NOW" ? (state.page = PAGES.joinus) : handleClick;
+        if (title === "JOIN NOW") {
+          state.page = PAGES.joinus;
+          state.model = null;
+        } else {
+          handleClick();
+        }
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

@@ -680,73 +680,74 @@ export const JoinUs = () => {
           )}
         </div>
       )}
-      {snap.page !== PAGES.joinus || snap.model && (
-        <div className="flex-col absolute right-[45%] top-[77%] z-50">
-          <p className="text-white font-bold text-[19px] mb-0 text-center">
-            {audioName.includes(".")
-              ? audioName.substring(0, audioName.indexOf("."))
-              : audioName}
-          </p>
-          <p className="text-white text-[13px] mb-0 text-center">
-            {` Artist Name: ${
-              audioName.includes(".")
+      {snap.page !== PAGES.joinus ||
+        (snap.model && (
+          <div className="flex-col absolute right-[45%] top-[77%] z-50">
+            <p className="text-white font-bold text-[19px] mb-0 text-center">
+              {audioName.includes(".")
                 ? audioName.substring(0, audioName.indexOf("."))
-                : audioName
-            }`}
-          </p>
-          <div className="w-full h-1 bg-gray-200 rounded overflow-hidden mt-2">
-            <div
-              className="h-full bg-blue-500"
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
-          <div className="flex mt-2 gap-x-3 justify-center items-center">
-            <div className="flex">
-              <img
-                src="/images/icon/prev.svg"
-                className="w-[5vh] cursor-pointer"
-                onClick={handlePrevious}
-              />
-              <img
-                src={`${
-                  !isPlaying
-                    ? "/images/icon/play.svg"
-                    : "/images/icon/pause.svg"
-                }`}
-                className="w-[6vh] cursor-pointer"
-                onClick={togglePlay}
-              />
-              <img
-                src="/images/icon/next.svg"
-                className="w-[5vh] cursor-pointer"
-                onClick={handleNext}
-              />
+                : audioName}
+            </p>
+            <p className="text-white text-[13px] mb-0 text-center">
+              {` Artist Name: ${
+                audioName.includes(".")
+                  ? audioName.substring(0, audioName.indexOf("."))
+                  : audioName
+              }`}
+            </p>
+            <div className="w-full h-1 bg-gray-200 rounded overflow-hidden mt-2">
+              <div
+                className="h-full bg-blue-500"
+                style={{ width: `${progress}%` }}
+              ></div>
             </div>
-            <div className="flex items-center">
-              <img
-                onClick={() => {
-                  setVolume(!sound ? 1 : 0);
-                  setSound(!sound);
-                }}
-                src={`${
-                  sound ? "/images/icon/speaker.svg" : "/images/icon/mute.svg"
-                }`}
-                alt="Speaker Icon"
-                className="w-6 mr-2"
-              />
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={volume}
-                onChange={handleVolumeChange}
-                className="w-14 h-1 bg-gray-300 rounded-lg appearance-none focus:outline-none"
-              />
+            <div className="flex mt-2 gap-x-3 justify-center items-center">
+              <div className="flex">
+                <img
+                  src="/images/icon/prev.svg"
+                  className="w-[5vh] cursor-pointer"
+                  onClick={handlePrevious}
+                />
+                <img
+                  src={`${
+                    !isPlaying
+                      ? "/images/icon/play.svg"
+                      : "/images/icon/pause.svg"
+                  }`}
+                  className="w-[6vh] cursor-pointer"
+                  onClick={togglePlay}
+                />
+                <img
+                  src="/images/icon/next.svg"
+                  className="w-[5vh] cursor-pointer"
+                  onClick={handleNext}
+                />
+              </div>
+              <div className="flex items-center">
+                <img
+                  onClick={() => {
+                    setVolume(!sound ? 1 : 0);
+                    setSound(!sound);
+                  }}
+                  src={`${
+                    sound ? "/images/icon/speaker.svg" : "/images/icon/mute.svg"
+                  }`}
+                  alt="Speaker Icon"
+                  className="w-6 mr-2"
+                />
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={volume}
+                  onChange={handleVolumeChange}
+                  className="w-14 h-1 bg-gray-300 rounded-lg appearance-none focus:outline-none"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        ))}
       {snap.page === PAGES.joinus && !snap.model && (
         <div className="flex w-full m-auto absolute md:top-[15%] md:left-[5%] lg:top-[12%] lg:left-[5%] xl:left-[12%] gap-x-[50px]  z-50 md:gap-x-[50px]">
           <div className="relative">
