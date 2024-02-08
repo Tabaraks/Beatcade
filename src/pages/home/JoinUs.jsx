@@ -173,7 +173,7 @@ export const JoinUs = () => {
       if (currentPlayer) {
         currentPlayer.stop();
         setProgress(0);
-        setStartTime(null);
+        setStartTime(Tone.now());
       }
 
       let player;
@@ -181,7 +181,7 @@ export const JoinUs = () => {
       player = new Tone.Player(`/sampler/MP3s/${audioPath}`).toDestination();
       player.autostart = true;
       setCurrentPlayer(player);
-      setStartTime(Tone.now());
+      setManageProgress(Tone.now());
     } else {
       console.error("No audio mapping found for image:", imageName);
     }
