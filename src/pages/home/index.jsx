@@ -178,10 +178,7 @@ const Home = () => {
   const setModelData = () => {
     console.log("kky", "setdata", snap);
     if (!snap.model || !snap.modelId) return;
-    const array =
-      state.index !== 3
-        ? MyData.products[snap.model]
-        : state.index === 3 && MyData.products["Sounds"];
+    const array = MyData.products[snap.model];
     const model = array.find((el) => el.id === snap.modelId);
     if (!model) return;
     const color = MyData.colors[model.colorName];

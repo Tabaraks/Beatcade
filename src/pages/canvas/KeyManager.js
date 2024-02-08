@@ -19,10 +19,10 @@ export class KeyManager {
             "F#3": "Luna.wav",
             A3: "Lapetus.wav",
             C4: "Deimos.wav",
-            D4: "plasma1.wav",
-            E4: "plasma2.wav",
-            F4: "plasma3.wav",
-            G4: "plasma4.wav",
+            D4: "IO.wav",
+            E4: "Kerberos.wav",
+            F4: "Luna.wav",
+            G4: "Neso.wav",
           }
         : this.btnColor === "Purple Play"
         ? {
