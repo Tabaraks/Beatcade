@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useSnapshot } from "valtio";
 import state from "../../store";
@@ -9,7 +9,7 @@ import MyData from "../../config/data.json";
 export const Menu = () => {
   const snap = useSnapshot(state);
   const menuRef = useRef(null);
-
+  const [menuItem, setMenuItem] = useState(2);
   useEffect(() => {
     if (snap.enableMenu) {
       menuRef.current.classList.add("menu-open");
@@ -17,9 +17,6 @@ export const Menu = () => {
       menuRef.current.classList.remove("menu-open");
     }
   }, [snap.enableMenu]);
-
-  
-
 
   const cardAnimation = {
     hidden: { opacity: 0, y: 100 },
@@ -35,6 +32,8 @@ export const Menu = () => {
     },
   };
 
+  const machineMenu = ["All", "Synths", "MPCs", "Sounds"];
+
   return (
     <motion.div
       ref={menuRef}
@@ -45,12 +44,10 @@ export const Menu = () => {
         background:
           "linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 80%, rgba(0,0,0,1) 100%)",
         display: snap.fullscreen ? "none" : "flex",
-      
       }}
-     
       initial={{ x: "100vw" }} // Initial position outside the viewport
-      animate={{ x: snap.enableMenu ? 0 : "100vw" }}  
-      transition={{ type: "spring", stiffness: 80, damping: 20 }} 
+      animate={{ x: snap.enableMenu ? 0 : "100vw" }}
+      transition={{ type: "spring", stiffness: 80, damping: 20 }}
     >
       <div
         className="relative w-full pt-[80px] pr-[60px] pb-[205px] pl-[20px] flex flex-col gap-[34px]"
@@ -69,29 +66,71 @@ export const Menu = () => {
               </p>
             </>
           )}
-          {snap.model === "Machines" && (
-            <>
-              <p>All</p>
-              <p>Synths</p>
-              <p
-                className="font-[Whangarei] font-normal h-fit tracking-[-0.56px] text-[35px] text-[#B0FFFF]"
-                style={{ textShadow: "0px 0px 10px #B0FFFF" }}
-              >
-                MPCs
-              </p>
-              <p>Sonics</p>
-            </>
-          )}
+          {snap.model === "Machines" &&
+            machineMenu.map((item, index) => {
+              const textStyle =
+                index === snap.index
+                  ? { textShadow: "0px 0px 10px #B0FFFF" }
+                  : {};
+
+              return (
+                <p
+                  key={index} // don't forget to add a key prop if 'index' is used as a key
+                  onClick={() => {
+                    state.index = index;
+                    state.modelId = "1";
+                  }}
+                  style={textStyle}
+                  className="font-[Whangarei] cursor-pointer font-normal h-fit tracking-[-0.56px] text-[35px] text-[#B0FFFF]"
+                >
+                  {item}
+                </p>
+              );
+            })}
         </div>
         <div className=" w-auto grid grid-cols-3 gap-x-4 gap-y-6">
           {snap.model &&
+            snap.index === 2 &&
             MyData.products[snap.model].map((product, index) => {
               return (
                 <motion.div
                   key={index}
-                  initial={{ y: "200%" }} 
-                  animate={{ y: snap.enableMenu ? "0.4%" : "100%" }}  
-                  transition={{ type: "spring", stiffness: 100, damping: 30,delay:0.3 }} 
+                  initial={{ y: "200%" }}
+                  animate={{ y: snap.enableMenu ? "0.4%" : "100%" }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 30,
+                    delay: 0.3,
+                  }}
+                >
+                  <Card
+                    name={product.menu_name}
+                    colorName={product.colorName}
+                    imgUrl={product.imgUrl}
+                    key={index}
+                    isSelected={product.id === snap.modelId}
+                    onClickProps={() => {
+                      state.modelId = product.id;
+                    }}
+                  />
+                </motion.div>
+              );
+            })}
+          {snap.model &&
+            snap.index === 3 &&
+            MyData.products["Sounds"].map((product, index) => {
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ y: "200%" }}
+                  animate={{ y: snap.enableMenu ? "0.4%" : "100%" }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 30,
+                    delay: 0.3,
+                  }}
                 >
                   <Card
                     name={product.menu_name}
